@@ -21,168 +21,72 @@
                     <div role="tabpanel" class="tab-pane no-padding active" id="tab1">
                         <div class="search-result">
                             <ul class="result">
-                                <li>
-                                    <div class="img">
-                                        <img src="/assets/images/axia.jpg">
-                                    </div>
-                                    <div class="info">
-                                        <div class="col-xs-10">
-                                            <div class="title">
-                                                <a href=""><span class="highlight">Perodua Axia</span></a></div>
-                                            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut
-                                                enim ad minim veniam, quis nostrud exercitation
+                                @foreach($cars  as $car)
+                                    <li>
+                                        <div class="img">
+                                            <img src="/assets/images/axia.jpg">
+                                        </div>
+                                        <div class="info col-xs-12">
+                                            <div class="col-xs-10">
+                                                <div class="title">
+                                                    <a href=""><span class="highlight">{{ $car->name }}</span></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <div class="btn-group-vertical" role="group">
+                                                    <a href="{{ route('car.edit',['car' => $car->id]) }}"
+                                                       class="btn btn-warning">
+                                                        <i class="fa fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="{{ route('car.delete',['car' => $car->id]) }}"
+                                                       class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-2">
-                                            <div class="btn-group-vertical" role="group">
-                                                <button class="btn btn-info">
-                                                    <i class="fa fa-eye"></i> View
-                                                </button>
-                                                <button class="btn btn-warning">
-                                                    <i class="fa fa-edit"></i> Edit
-                                                </button>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="/assets/images/myvi.jpg">
-                                    </div>
-                                    <div class="info">
-                                        <div class="col-xs-10">
-                                            <div class="title">
-                                                <a href=""><span class="highlight">Perodua Axia</span></a></div>
-                                            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut
-                                                enim ad minim veniam, quis nostrud exercitation
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <div class="btn-group-vertical" role="group">
-                                                <button class="btn btn-info">
-                                                    <i class="fa fa-eye"></i> View
-                                                </button>
-                                                <button class="btn btn-warning">
-                                                    <i class="fa fa-edit"></i> Edit
-                                                </button>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                             <div class="footer">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href=#" aria-label="Previous">
-                                            <span aria-hidden="true">«</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                {{ $cars->render() }}
                             </div>
                         </div>
                     </div>
                     <div role="tabpanel" class="tab-pane" id="tab2">
                         <div class="search-result">
                             <ul class="result">
-                                <li>
-                                    <div class="img">
-                                        <img src="/assets/images/aeon.png">
-                                    </div>
-                                    <div class="info col-xs-12">
-                                        <div class="col-xs-10">
-                                            <div class="title">
-                                                <a href=""><span class="highlight">Aeon Taman Universiti</span></a>
-                                            </div>
-                                            <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                Ut
-                                                enim ad minim veniam, quis nostrud exercitation
-                                            </div>
+                                @foreach($locations as $location)
+                                    <li>
+                                        <div class="img">
+                                            <img src="/assets/images/aeon.png">
                                         </div>
-                                        <div class="col-xs-2">
-                                            <div class="btn-group-vertical" role="group">
-                                                <button class="btn btn-info">
-                                                    <i class="fa fa-eye"></i> View
-                                                </button>
-                                                <button class="btn btn-warning">
-                                                    <i class="fa fa-edit"></i> Edit
-                                                </button>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </button>
+                                        <div class="info col-xs-12">
+                                            <div class="col-xs-10">
+                                                <div class="title">
+                                                    <a href=""><span class="highlight">{{ $location->name }}</span></a>
+                                                </div>
+                                                <div class="description">{{ $location->description }}</div>
                                             </div>
-                                        </div>
+                                            <div class="col-xs-2">
+                                                <div class="btn-group-vertical" role="group">
+                                                    <a href="{{ route('location.edit',['location' => $location->id]) }}"
+                                                       class="btn btn-warning">
+                                                        <i class="fa fa-edit"></i> Edit
+                                                    </a>
+                                                    <a href="{{ route('location.delete',['location' => $location->id]) }}"
+                                                       class="btn btn-danger">
+                                                        <i class="fa fa-trash"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </div>
 
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="img">
-                                        <img src="/assets/images/dataran_jb.jpg">
-                                    </div>
-                                    <div class="info col-xs-12">
-                                        <div class="col-xs-10">
-                                            <div class="title">
-                                                <a href=""><span class="highlight">Dataran Johor Bahru</span></a>
-                                            </div>
-                                            <div class="description">
-                                                Shopping Mall, Miscellaneous Shop, and Convenience Store at Skudai
-                                            </div>
                                         </div>
-                                        <div class="col-xs-2">
-                                            <div class="btn-group-vertical" role="group">
-                                                <button class="btn btn-info">
-                                                    <i class="fa fa-eye"></i> View
-                                                </button>
-                                                <button class="btn btn-warning">
-                                                    <i class="fa fa-edit"></i> Edit
-                                                </button>
-                                                <button class="btn btn-danger">
-                                                    <i class="fa fa-trash"></i> Delete
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforeach
                             </ul>
                             <div class="footer">
-                                <ul class="pagination">
-                                    <li>
-                                        <a href=#" aria-label="Previous">
-                                            <span aria-hidden="true">«</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="#">1</a></li>
-                                    <li class="active"><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li>
-                                        <a href="#" aria-label="Next">
-                                            <span aria-hidden="true">»</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                {{ $locations->render() }}
                             </div>
                         </div>
                     </div>
@@ -190,14 +94,24 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('location.store') }}" class="btn btn-info add"><i class="fa fa-building fa-2x"></i></a>
+    <a href="{{ route('car.store') }}" class="btn btn-info add" style="right: 80px!important;"><i class="fa fa-car fa-2x"></i></a>
 
 @endsection
 
 
 @section('styles')
     <style>
-        .full {
-            width: 100%;
+        a.btn {
+            color: white !important;
+        }
+        .add {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 100px;
+            z-index: 99999;
         }
 
     </style>
