@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="/assets/css/vendor.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/flat-admin.css">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
     <!-- Theme -->
     <link rel="stylesheet" type="text/css" href="/assets/css/theme/blue-sky.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/theme/blue.css">
