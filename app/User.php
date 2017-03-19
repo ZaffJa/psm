@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Transaction;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -10,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password','matric_no','phone'
+        'name', 'email', 'password','matric_no','phone','car_name','role_id'
     ];
 
     protected $hidden = [
@@ -25,5 +26,10 @@ class User extends Authenticatable
     public function setMatricNoAttribute($value)
     {
         $this->attributes['matric_no'] = strtoupper($value);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class)->with('location','car','user','owner');
     }
 }

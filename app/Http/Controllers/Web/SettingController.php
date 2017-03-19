@@ -11,8 +11,8 @@ class SettingController extends Controller
 {
     public function view()
     {
-        $cars = Car::paginate(1);
-        $locations = Location::paginate(1);
+        $cars = Car::paginate(50);
+        $locations = Location::paginate(50);
 
         return view('setting',compact('cars','locations'));
     }

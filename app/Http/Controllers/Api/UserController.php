@@ -16,7 +16,6 @@ class UserController extends Controller
             'password' => 'required',
             'matric_no' => 'required|unique:users'
         ]);
-
         if ($validator->fails()) {
             return response()->json([
                 'code' => 500,
@@ -24,8 +23,11 @@ class UserController extends Controller
                 'errors' => $validator->errors()
             ]);
         }
+        if ($request->car_name != null) {
+            $request['role_id'] = 3;
+        }
 
-        $user = User::create($request->all());
+        User::create($request->all());
 
         return response()->json([
             'code' => 200,
@@ -35,7 +37,7 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        if(\Auth::attempt(['matric_no' => $request->matric_no, 'password' => $request->password])){
+        if (\Auth::attempt(['matric_no' => $request->matric_no, 'password' => $request->password])) {
             return response()->json([
                 'code' => 200,
                 'message' => 'Successfully logged in',

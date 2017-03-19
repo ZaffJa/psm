@@ -16,6 +16,10 @@ class LocationController extends Controller
 
     public function store(LocationRequest $request)
     {
+        $file = $request->file('image');
+        $filePath = '/locations/'.time() . $file->getClientOriginalName();
+        $file->move('locations',$filePath);
+        $request['file_path'] = $filePath;
         Location::create($request->all());
         return back()->with('status', 'Successfully added a new location');
     }

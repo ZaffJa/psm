@@ -25,7 +25,7 @@ class TransactionRequest extends FormRequest
     {
         return [
             'user_id' => 'required|numeric',
-            'pickup_time' => 'required|numeric',
+            'pickup_time' => 'required',
             'request_type' => 'required|numeric',
             'price' => 'required|numeric',
 

@@ -24,7 +24,7 @@
                                 @foreach($cars  as $car)
                                     <li>
                                         <div class="img">
-                                            <img src="/assets/images/axia.jpg">
+                                            <img src="{{ $car->file_path or '/assets/images/b_no_image_icon.gif' }}">
                                         </div>
                                         <div class="info col-xs-12">
                                             <div class="col-xs-10">
@@ -59,7 +59,7 @@
                                 @foreach($locations as $location)
                                     <li>
                                         <div class="img">
-                                            <img src="/assets/images/aeon.png">
+                                            <img src="{{ $location->file_path or '/assets/images/b_no_image_icon.gif' }}">
                                         </div>
                                         <div class="info col-xs-12">
                                             <div class="col-xs-10">

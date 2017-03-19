@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     protected $fillable = [
-        'user_id','location_id','car_id','request_type','price','pickup_time','pickup_location'
+        'user_id','location_id','car_id','request_type','price','pickup_time','pickup_location','duration','owner_id',
+        'status'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class,'owner_id');
     }
     public function location()
     {
