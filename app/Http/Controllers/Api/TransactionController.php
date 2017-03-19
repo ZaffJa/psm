@@ -13,14 +13,14 @@ class TransactionController extends Controller
     public function store(TransactionRequest $request)
     {
 
-        $request = '10 : 00 PM';
-
-        $timeArray = explode(' : ', $request);
-
-        $hour = (int)$timeArray[0];
-        $minute = (int)preg_replace("/[^0-9]/", "", $timeArray[1]);
-
-        return $minute;
+//        $request = '10 : 00 PM';
+//
+//        $timeArray = explode(' : ', $request);
+//
+//        $hour = (int)$timeArray[0];
+//        $minute = (int)preg_replace("/[^0-9]/", "", $timeArray[1]);
+//
+//        return $minute;
         Transaction::create($request->all());
 
         return response()->json([
