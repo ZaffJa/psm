@@ -49,4 +49,13 @@ class UserController extends Controller
             'message' => 'Mismatch credentials',
         ]);
     }
+
+    public function checkMatricNumber(Request $request)
+    {
+        $user = User::where('matric_no', $request->matric_no)->first();
+
+        if ($user)
+            return 1;
+        return 0;
+    }
 }
