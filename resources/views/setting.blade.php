@@ -95,7 +95,7 @@
         </div>
     </div>
     <a href="{{ route('location.store') }}" class="btn btn-info add"><i class="fa fa-building fa-2x"></i></a>
-    <a href="{{ route('car.store') }}" class="btn btn-info add" style="right: 80px!important;"><i class="fa fa-car fa-2x"></i></a>
+    {{--<a href="{{ route('car.store') }}" class="btn btn-info add" style="right: 80px!important;"><i class="fa fa-car fa-2x"></i></a>--}}
 
 @endsection
 

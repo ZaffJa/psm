@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\User;
+use Hash;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Validator;
@@ -57,5 +58,41 @@ class UserController extends Controller
         if ($user)
             return 1;
         return 0;
+    }
+
+    public function update(Request $request)
+    {
+        $user = User::find($request->user_id);
+
+        if ($request->password != null) {
+            if (Hash::check($request->password, $user->password)) {
+                // The passwords match...
+                $user->update([
+                    'password' => $request->password
+                ]);
+            }
+        }
+
+        if ($request->car_name != null)
+            $user->update([
+                'role_id' => 3,
+                'car_name' => $request->car_name
+            ]);
+        else
+            $user->update([
+                'role_id' => 2,
+            ]);
+
+
+        if ($request->phone != null)
+            $user->update([
+                'phone' => $request->phone
+            ]);
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Updated your information',
+            'data' => $user
+        ]);
     }
 }

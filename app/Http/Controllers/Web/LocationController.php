@@ -26,6 +26,12 @@ class LocationController extends Controller
 
     public function update(Location $location, Request $request)
     {
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $filePath = '/locations/'.time() . $file->getClientOriginalName();
+            $file->move('locations',$filePath);
+            $request['file_path'] = $filePath;
+        }
         $location->update($request->all());
         return back()->with('status', 'Successfully updated ' . $location->name);
     }

@@ -38,7 +38,7 @@
     </script>
     <div class="app-container">
 
-        @include('layouts.navbar')
+{{--        @include('layouts.navbar')--}}
         <div class="row">
             <div class="col-sm-12">
                 @include('layouts.notifications')

@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class)->with('location','car','user','owner');
     }
+
+    public function services()
+    {
+        return $this->hasMany(Transaction::class,'owner_id')->with('location','car','user','owner');
+    }
 }

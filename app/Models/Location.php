@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     protected $fillable = [
-        'name', 'description', 'price_from_utm', 'file_path'
+        'name', 'description', 'price_from_utm', 'file_path','lat','lng'
     ];
 
     public function getFilePathAttribute($value)

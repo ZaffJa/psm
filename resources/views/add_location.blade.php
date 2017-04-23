@@ -23,6 +23,18 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-3 control-label" for="lat">Latitude</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="lat" id="lat" class="form-control" autocomplete="off" value="{{ old('lat') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="lng">Longitude</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="lng" id="name" class="form-control" autocomplete="off" value="{{ old('lng') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-3 control-label" for="description">Description</label>
                                 <div class="col-md-9">
                                     <textarea name="description" id="description" rows="3"

@@ -17,4 +17,8 @@ Route::group(['namespace' => 'Web'], function () {
     Route::get('location/{location}/delete', 'LocationController@delete')->name('location.delete');
     Route::get('setting', 'SettingController@view')->name('setting');
 
+
+    Route::get('users', 'UserController@view')->name('users');
+    Route::get('user/{user}', 'UserController@viewUserDetail')->name('user.details');
+
 });

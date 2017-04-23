@@ -31,12 +31,20 @@ class TransactionController extends Controller
 
     public function view(Request $request)
     {
-        $user = User::find($request->user_id);
+        $transactions = Transaction::with('location','car','user','owner')
+            ->where('user_id', $request->user_id)
+            ->whereIn('status', [2, 3])
+            ->get();
+
+        $transactions = Transaction::with('location', 'car', 'user', 'owner')
+            ->where('owner_id', $request->user_id)
+            ->whereIn('status', [2, 3])
+            ->get();
 
         return response()->json([
             'code' => 200,
             'message' => 'Your request has been approved',
-            'data' => $user->transactions
+            'data' => $transactions
         ]);
     }
 
@@ -54,6 +62,69 @@ class TransactionController extends Controller
         ]);
     }
 
+    public function viewUpcomingRequest(Request $request)
+    {
+
+
+        $transactions = Transaction::with('location', 'car', 'user', 'owner')
+            ->where('status', 1)
+            ->where('owner_id', $request->user_id)
+            ->get();
+
+        if ($transactions == null) {
+
+            $transactions = Transaction::with('location', 'car', 'user', 'owner')
+                ->whereIn('status', [0, 1])
+                ->where('user_id', $request->user_id)
+                ->get();
+        }
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Your request has been approved',
+            'data' => $transactions
+        ]);
+    }
+
+    public function userCancelRequest(Request $request)
+    {
+        // Check whether owner or user request the cancellation
+        $transaction = Transaction::where('id', $request->transaction_id)
+            ->where('user_id', $request->user_id)->first();
+
+        if ($transaction) {
+            $transaction->update([
+                'status' => 3
+            ]);
+        } else {
+            $transaction = Transaction::find($request->transaction_id)->update([
+                'owner_id' => null,
+                'status' => 0
+            ]);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Your have successfully canceled this request',
+            'data' => $transaction
+        ]);
+    }
+
+
+    public function doneRequest(Request $request)
+    {
+        Transaction::find($request->transaction_id)->update([
+            'status' => 2
+        ]);
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Request completed',
+            ''
+        ]);
+    }
+
+
     public function acceptRequest(Request $request)
     {
         Transaction::find($request->transaction_id)->update([
@@ -70,36 +141,36 @@ class TransactionController extends Controller
     public function dashboard(Request $request)
     {
         $ride_takens = Transaction::where('user_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 1)->count();
 
         $ride_takens_price = Transaction::where('user_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 1)->sum('price');
 
         $rent_takens = Transaction::where('user_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 2)->count();
 
         $rent_takens_price = Transaction::where('user_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 2)->sum('price');
 
 
         $ride_givens = Transaction::where('owner_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 1)->count();
 
         $ride_givens_price = Transaction::where('owner_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 1)->sum('price');
 
         $rent_givens = Transaction::where('owner_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 2)->count();
 
         $rent_givens_price = Transaction::where('owner_id', $request->user_id)
-            ->where('status', 1)
+            ->whereIn('status',[2,3])
             ->where('request_type', 2)->sum('price');
 
         return response()->json([

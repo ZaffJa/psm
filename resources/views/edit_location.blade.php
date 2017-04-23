@@ -4,16 +4,40 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <form class="form form-horizontal" method="post" action="{{ route('location.update',['location' => $location]) }}">
+                <form class="form form-horizontal" method="post" action="{{ route('location.update',['location' => $location]) }}" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="section">
                         <div class="section-title">Edit Location Information</div>
                         <div class="section-body">
                             <div class="form-group">
+                                <div class="col-xs-offset-3" style="padding-left: 15px;">
+                                    @if($location->file_path)
+                                        <img id="blah" src="{{ $location->file_path }}"
+                                             alt="your image" class="thumbnail" style="height: 200px; width: 200px"/>
+                                        @else
+                                        <img id="blah" src="/assets/images/b_no_image_icon.gif"
+                                             alt="your image" class="thumbnail" style="height: 200px; width: 200px"/>
+                                    @endif
+                                    <input type='file' id="imgInp" value="Upload an image" name="image"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-3 control-label" for="name">Name</label>
                                 <div class="col-md-9">
                                     <input type="text" name="name" id="name" class="form-control"
                                            value="{{ $location->name }}" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="lat">Latitude</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="lat" id="lat" class="form-control" autocomplete="off" value="{{ $location->lat }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="lng">Longitude</label>
+                                <div class="col-md-9">
+                                    <input type="text" name="lng" id="name" class="form-control" autocomplete="off" value="{{ $location->lng }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -57,4 +81,24 @@
             padding-top: 5px;
         }
     </style>
+@endsection
+
+@section('scripts')
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    </script>
 @endsection
