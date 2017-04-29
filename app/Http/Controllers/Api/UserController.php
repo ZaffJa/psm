@@ -73,20 +73,26 @@ class UserController extends Controller
             }
         }
 
-        if ($request->car_name != null)
+        if ($request->car_name != null) {
             $user->update([
                 'role_id' => 3,
                 'car_name' => $request->car_name
             ]);
-        else
+        }
+        else {
             $user->update([
                 'role_id' => 2,
             ]);
-
+        }
 
         if ($request->phone != null)
             $user->update([
                 'phone' => $request->phone
+            ]);
+
+        if ($request->email != null)
+            $user->update([
+                'email' => $request->email
             ]);
 
         return response()->json([
