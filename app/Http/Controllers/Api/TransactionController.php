@@ -64,8 +64,6 @@ class TransactionController extends Controller
 
     public function viewUpcomingRequest(Request $request)
     {
-
-
         $transactions = Transaction::with('location', 'car', 'user', 'owner')
             ->where('status', 1)
             ->where('owner_id', $request->user_id)

@@ -9,7 +9,7 @@ class Transaction extends Model
 {
     protected $fillable = [
         'user_id','location_id','car_id','request_type','price','pickup_time','pickup_location','duration','owner_id',
-        'status'
+        'status','pickup_lat','pickup_lng'
     ];
 
     public function user()
