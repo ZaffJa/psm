@@ -32,9 +32,9 @@ class TransactionController extends Controller
 
     public function view(Request $request)
     {
-        $transactions = Transaction::with('location','car','user','owner')
+        $transactions = Transaction::with('location', 'car', 'user', 'owner')
             ->where('user_id', $request->user_id)
-            ->orWhere(function($query) use($request) {
+            ->orWhere(function ($query) use ($request) {
                 $query->where('owner_id', $request->user_id)
                     ->whereIn('status', [2, 3]);
             })
@@ -70,17 +70,13 @@ class TransactionController extends Controller
     public function viewUpcomingRequest(Request $request)
     {
         $transactions = Transaction::with('location', 'car', 'user', 'owner')
-            ->where('status', 1)
-            ->where('owner_id', $request->user_id)
-            ->get();
-
-        if ($transactions == null) {
-
-            $transactions = Transaction::with('location', 'car', 'user', 'owner')
-                ->whereIn('status', [0, 1])
-                ->where('user_id', $request->user_id)
-                ->get();
-        }
+            ->where(function ($query) use ($request) {
+                $query->where('status', 1)
+                    ->where('owner_id', $request->user_id);
+            })->orWhere(function ($query) use ($request) {
+                $query->whereIn('status', [0, 1])
+                    ->where('user_id', $request->user_id);
+            })->get();
 
         return response()->json([
             'code' => 200,
@@ -144,36 +140,36 @@ class TransactionController extends Controller
     public function dashboard(Request $request)
     {
         $ride_takens = Transaction::where('user_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 1)->count();
 
         $ride_takens_price = Transaction::where('user_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 1)->sum('price');
 
         $rent_takens = Transaction::where('user_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 2)->count();
 
         $rent_takens_price = Transaction::where('user_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 2)->sum('price');
 
 
         $ride_givens = Transaction::where('owner_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 1)->count();
 
         $ride_givens_price = Transaction::where('owner_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 1)->sum('price');
 
         $rent_givens = Transaction::where('owner_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 2)->count();
 
         $rent_givens_price = Transaction::where('owner_id', $request->user_id)
-            ->whereIn('status',[2,3])
+            ->whereIn('status', [2, 3])
             ->where('request_type', 2)->sum('price');
 
         return response()->json([
