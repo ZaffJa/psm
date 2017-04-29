@@ -34,13 +34,17 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::with('location','car','user','owner')
             ->where('user_id', $request->user_id)
+            ->orWhere(function($query) use($request) {
+                $query->where('owner_id', $request->user_id)
+                    ->whereIn('status', [2, 3]);
+            })
             ->whereIn('status', [2, 3])
             ->get();
 
-        $transactions = Transaction::with('location', 'car', 'user', 'owner')
-            ->where('owner_id', $request->user_id)
-            ->whereIn('status', [2, 3])
-            ->get();
+//        $transactions = Transaction::with('location', 'car', 'user', 'owner')
+//            ->where('owner_id', $request->user_id)
+//            ->whereIn('status', [2, 3])
+//            ->get();
 
         return response()->json([
             'code' => 200,
