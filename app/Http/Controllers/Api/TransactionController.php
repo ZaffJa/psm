@@ -190,8 +190,8 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function testing()
-    {
-        return Transaction::find(1)->pickup_time;
-    }
+//    public function testing()
+//    {
+//        return Transaction::find(1)->pickup_time;
+//    }
 }
