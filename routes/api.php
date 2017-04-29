@@ -17,4 +17,5 @@ Route::group(['middleware' => 'cors','namespace'=>'Api'], function(Router $route
     $router->get('transaction/done','TransactionController@doneRequest');
     $router->get('dashboard','TransactionController@dashboard');
     $router->get('locations','LocationController@getLocations');
+    $router->get('test','TransactionController@testing');
 });

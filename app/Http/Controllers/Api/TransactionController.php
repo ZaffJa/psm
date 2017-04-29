@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\TransactionRequest;
 use App\Models\Transaction;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -183,5 +184,10 @@ class TransactionController extends Controller
             'rent_givens' => $rent_givens,
             'rent_givens_price' => $rent_givens_price,
         ]);
+    }
+
+    public function testing()
+    {
+        return Transaction::find(1)->pickup_time;
     }
 }

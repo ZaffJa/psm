@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
@@ -29,6 +30,12 @@ class Transaction extends Model
     public function car()
     {
         return $this->belongsTo(Car::class);
+    }
+
+    public function getPickupTimeAttribute($value) {
+
+        $strtotime = new Carbon($value);
+        return $strtotime->toDayDateTimeString();
     }
 
 }
