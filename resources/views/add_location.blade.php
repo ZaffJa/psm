@@ -41,16 +41,16 @@
                                               class="form-control">{{ old('description') }}</textarea>
                                 </div>
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--<label class="col-md-3 control-label">Price From UTM</label>--}}
-                                {{--<div class="col-md-9">--}}
-                                    {{--<div class="input-group">--}}
-                                        {{--<span class="input-group-addon"><label for="price_from_utm">RM</label></span>--}}
-                                        {{--<input type="number" class="form-control" id="price_from_utm"--}}
-                                               {{--name="price_from_utm" value="{{ old('price_from_utm') }}">--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Price From UTM</label>
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><label for="price_from_utm">RM</label></span>
+                                        <input type="number" class="form-control" id="price_from_utm"
+                                               name="price_from_utm" value="{{ old('price_from_utm') }}">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-footer">
