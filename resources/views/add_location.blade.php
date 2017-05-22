@@ -47,7 +47,8 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><label for="price_from_utm">RM</label></span>
                                         <input type="number" class="form-control" id="price_from_utm"
-                                               name="price_from_utm" value="{{ old('price_from_utm') }}">
+                                               step="0.01"
+                                               name="price_from_utm" value="{{ old('price_from_utm') or 1}}">
                                     </div>
                                 </div>
                             </div>
