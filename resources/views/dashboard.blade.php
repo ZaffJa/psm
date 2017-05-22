@@ -35,8 +35,26 @@
             </div>
         </a>
     </div>
+    <a href="{{ route('update.transactions') }}" class="btn btn-info add"><i class="fa fa-refresh fa-2x"></i></a>
 
 
+@endsection
+
+@section('styles')
+    <style>
+        a.btn {
+            color: white !important;
+        }
+        .add {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border-radius: 100px;
+            z-index: 99999;
+        }
+
+    </style>
 @endsection
 
 

@@ -1,5 +1,6 @@
 <?php
 Route::get('/','DashboardController@view');
+Route::get('update-transactions','DashboardController@updateTransactions')->name('update.transactions');
 Route::get('login','AuthController@login');
 
 

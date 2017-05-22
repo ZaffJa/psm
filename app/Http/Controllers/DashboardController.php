@@ -28,4 +28,22 @@ class DashboardController extends Controller
         return view('dashboard',compact('users','get_rides','get_cars'));
     }
 
+    public function updateTransactions()
+    {
+        $transactions = Transaction::whereIn('status',[2,3])->get();
+        $now = Carbon::now();
+        echo $now.'<br>';
+        foreach ($transactions as $transaction) {
+            $end = $transaction->updated_at;
+            $length = $end->diffInHours($now);
+            if($length > 2) {
+                $transaction->update([
+                    'status' => 3
+                ]);
+            }
+        }
+        return redirect('/')->with('status', 'Refreshed transactions');
+    }
+
+
 }
